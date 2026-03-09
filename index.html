@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日出勤统计系统</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 每日出勤统计系统</h1>
+            <p class="subtitle">Daily Attendance Tracking System</p>
+        </header>
+
+        <main>
+            <!-- Add Attendance Section -->
+            <section class="card">
+                <h2>记录出勤</h2>
+                <div class="form-group">
+                    <label for="name">姓名:</label>
+                    <input type="text" id="name" placeholder="请输入姓名">
+                </div>
+                <div class="form-group">
+                    <label for="date">日期:</label>
+                    <input type="date" id="date">
+                </div>
+                <div class="form-group">
+                    <label for="status">状态:</label>
+                    <select id="status">
+                        <option value="出勤">✓ 出勤</option>
+                        <option value="缺勤">✗ 缺勤</option>
+                        <option value="请假">◐ 请假</option>
+                        <option value="迟到">⏰ 迟到</option>
+                    </select>
+                </div>
+                <button onclick="addAttendance()" class="btn btn-primary">添加记录</button>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="card stats-card">
+                <h2>统计概览</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalRecords">0</div>
+                        <div class="stat-label">总记录数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="presentCount">0</div>
+                        <div class="stat-label">出勤次数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="absentCount">0</div>
+                        <div class="stat-label">缺勤次数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="attendanceRate">0%</div>
+                        <div class="stat-label">出勤率</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter and Search Section -->
+            <section class="card">
+                <h2>查询记录</h2>
+                <div class="filter-group">
+                    <input type="text" id="searchName" placeholder="按姓名搜索..." onkeyup="filterRecords()">
+                    <input type="date" id="searchDate" onchange="filterRecords()">
+                    <select id="searchStatus" onchange="filterRecords()">
+                        <option value="">全部状态</option>
+                        <option value="出勤">出勤</option>
+                        <option value="缺勤">缺勤</option>
+                        <option value="请假">请假</option>
+                        <option value="迟到">迟到</option>
+                    </select>
+                    <button onclick="clearFilters()" class="btn btn-secondary">清除筛选</button>
+                    <button onclick="clearAllData()" class="btn btn-danger">清空所有数据</button>
+                </div>
+            </section>
+
+            <!-- Records Table Section -->
+            <section class="card">
+                <h2>出勤记录</h2>
+                <div class="table-container">
+                    <table id="attendanceTable">
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>姓名</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr>
+                                <td colspan="4" class="no-data">暂无记录</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2026 每日出勤统计系统 | 数据存储在本地浏览器中</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
