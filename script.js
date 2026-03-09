@@ -163,20 +163,30 @@ function clearAllData() {
     }
 }
 
-// Show message (simple notification)
+// Show message (toast notification)
 function showMessage(message, type) {
-    // Create a simple alert for now
-    // In a production app, you'd want a more sophisticated notification system
     const emoji = {
         'success': '✓',
         'info': 'ℹ',
         'warning': '⚠'
     };
     
-    console.log(`${emoji[type] || ''} ${message}`);
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.textContent = `${emoji[type] || ''} ${message}`;
     
-    // You could enhance this with a toast notification library
-    // For now, we'll use a simple console log and the browser might show it
+    // Add to body
+    document.body.appendChild(toast);
+    
+    // Trigger animation
+    setTimeout(() => toast.classList.add('show'), 100);
+    
+    // Remove after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => document.body.removeChild(toast), 300);
+    }, 3000);
 }
 
 // Export data to CSV (bonus feature)
